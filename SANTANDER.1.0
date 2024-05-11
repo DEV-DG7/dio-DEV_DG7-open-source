@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+public class ContaTerminal {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        try {
+            System.out.println("Seja Bem-vindo ao Banco Santander!");
+            System.out.print("Por Gentilezar, escrevar seu nome: ");
+            String nome = scanner.nextLine();
+            
+            System.out.print("Insira o saldo inicial da conta: R$ ");
+            double saldo = scanner.nextDouble();
+            scanner.nextLine(); // Consumir a linha restante após o número
+            
+            ContaBancaria conta = new ContaBancaria(nome, saldo);
+            System.out.println("Conta criada com sucesso!");
+            System.out.println(conta);
+            
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao criar a conta: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+class ContaBancaria {
+    private String titular;
+    private double saldo;
+
+    public ContaBancaria(String titular, double saldo) {
+        this.titular = titular;
+        this.saldo = saldo;
+    }
+
+    @Override
+    public String toString() {
+        return "Titular: " + titular + " | Saldo: R$ " + String.format("%.2f", saldo);
+    }
+}
